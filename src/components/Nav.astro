@@ -2,9 +2,9 @@
 import Icon from "./Icon.astro";
 
 const links = [
-  { href: "#home", label: "Home" },
-  { href: "#experience", label: "Experience" },
-  { href: "#skills", label: "Skills" },
+  { href: "#home", label: "Home", gaLabel: "home" },
+  { href: "#experience", label: "Experience", gaLabel: "experience" },
+  { href: "#skills", label: "Skills", gaLabel: "skills" },
 ];
 ---
 
@@ -15,6 +15,8 @@ const links = [
   <div class="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
     <a
       href="#home"
+      data-ga-event="nav_click"
+      data-ga-label="home"
       class="font-heading text-lg font-bold tracking-tight transition-colors hover:text-cyan-400"
     >
       CJ
@@ -22,9 +24,11 @@ const links = [
 
     <div class="hidden items-center gap-8 sm:flex">
       {
-        links.map(({ href, label }) => (
+        links.map(({ href, label, gaLabel }) => (
           <a
             href={href}
+            data-ga-event="nav_click"
+            data-ga-label={gaLabel}
             class="text-sm text-slate-400 transition-colors hover:text-white"
           >
             {label}
@@ -38,6 +42,8 @@ const links = [
         href="https://github.com/rbth7e5"
         target="_blank"
         rel="noopener"
+        data-ga-event="external_link_click"
+        data-ga-label="github"
         class="text-slate-400 transition-colors hover:text-white"
         aria-label="GitHub"
       >
@@ -47,6 +53,8 @@ const links = [
         href="https://www.linkedin.com/in/chen-caijie/"
         target="_blank"
         rel="noopener"
+        data-ga-event="external_link_click"
+        data-ga-label="linkedin"
         class="text-slate-400 transition-colors hover:text-white"
         aria-label="LinkedIn"
       >
@@ -75,9 +83,11 @@ const links = [
   >
     <div class="flex flex-col px-6 py-4 gap-4">
       {
-        links.map(({ href, label }) => (
+        links.map(({ href, label, gaLabel }) => (
           <a
             href={href}
+            data-ga-event="nav_click"
+            data-ga-label={gaLabel}
             class="mobile-nav-link text-sm text-slate-300 transition-colors hover:text-white"
           >
             {label}

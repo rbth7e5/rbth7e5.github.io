@@ -56,7 +56,18 @@ const {
   <body class="bg-slate-900 text-slate-100 antialiased">
     <slot />
     <script>
-      const observer = new IntersectionObserver(
+      document.addEventListener("click", (e) => {
+        const el = e.target.closest("[data-ga-event]");
+        if (!el || typeof gtag !== "function") return;
+        const eventName = el.getAttribute("data-ga-event");
+        const label = el.getAttribute("data-ga-label");
+        if (eventName) {
+          gtag("event", eventName, label ? { event_label: label } : {});
+        }
+      });
+
+      const sectionsSeen = new Set();
+      const animationObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
@@ -66,9 +77,22 @@ const {
         },
         { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
       );
-      document
-        .querySelectorAll("[data-animate]")
-        .forEach((el) => observer.observe(el));
+      const sectionObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const section = entry.target.getAttribute("data-ga-section");
+            if (section && !sectionsSeen.has(section) && typeof gtag === "function") {
+              sectionsSeen.add(section);
+              gtag("event", "section_view", { event_label: section });
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
+      );
+
+      document.querySelectorAll("[data-animate]").forEach((el) => animationObserver.observe(el));
+      document.querySelectorAll("[data-ga-section]").forEach((el) => sectionObserver.observe(el));
     </script>
   </body>
 </html>
