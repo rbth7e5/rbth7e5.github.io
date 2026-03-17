@@ -1,0 +1,82 @@
+---
+import Icon from "./Icon.astro";
+---
+
+<section id="home" class="relative flex min-h-screen items-center overflow-hidden">
+  <div class="absolute inset-0 z-0">
+    <img
+      src="/images/cover.jpeg"
+      alt=""
+      class="h-full w-full object-cover"
+      loading="eager"
+    />
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/95 to-slate-900/80"
+    >
+    </div>
+  </div>
+
+  <div class="relative z-10 mx-auto w-full max-w-5xl px-6 py-32">
+    <div class="flex flex-col items-center gap-12 lg:flex-row lg:gap-20">
+      <div class="flex-1 text-center lg:text-left">
+        <p
+          class="mb-3 text-sm font-medium uppercase tracking-widest text-cyan-400"
+        >
+          Hello, I'm
+        </p>
+        <h1
+          class="mb-4 font-heading text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
+        >
+          Chen Caijie
+        </h1>
+        <p class="mb-6 font-heading text-lg font-medium text-slate-300 sm:text-xl">
+          Software Engineer @ The Trade Desk
+        </p>
+        <p
+          class="mx-auto mb-8 max-w-lg leading-relaxed text-slate-400 lg:mx-0"
+        >
+          Full-stack engineer with ~4 years building TTD's next-generation
+          media buying platform (Kokai). Primary contributor across
+          React/TypeScript frontend and C#/.NET backend, shipping features used
+          daily by advertisers at scale.
+        </p>
+
+        <div
+          class="flex flex-wrap justify-center gap-4 lg:justify-start"
+        >
+          <a
+            href="https://docs.google.com/document/d/1NPI-piwKe-UpZ0HXgYMwgq9PFD0h3gsX1yV5ZfGd3ko/export?format=pdf"
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2 rounded-lg bg-cyan-500 px-6 py-2.5 text-sm font-semibold text-slate-900 transition-colors hover:bg-cyan-400"
+          >
+            <Icon name="download" class="h-4 w-4" />
+            Resume
+          </a>
+          <a
+            href="mailto:caijie96@gmail.com"
+            class="inline-flex items-center gap-2 rounded-lg border border-slate-600 px-6 py-2.5 text-sm font-semibold text-slate-300 transition-colors hover:border-slate-400 hover:text-white"
+          >
+            Get in Touch
+          </a>
+        </div>
+
+      </div>
+
+      <div class="order-first shrink-0 lg:order-last">
+        <div class="relative">
+          <div
+            class="absolute -inset-4 rounded-full bg-gradient-to-br from-cyan-500/20 to-slate-700/20 blur-2xl"
+          >
+          </div>
+          <img
+            src="/images/avatar.jpg"
+            alt="Chen Caijie"
+            class="relative h-48 w-48 rounded-full object-cover ring-2 ring-slate-700/50 lg:h-64 lg:w-64"
+            loading="eager"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

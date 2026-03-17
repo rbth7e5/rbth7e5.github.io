@@ -1,0 +1,50 @@
+---
+const categories = [
+  {
+    name: "Languages",
+    skills: ["TypeScript", "C#", "Java", "Python", "Go", "SQL"],
+  },
+  {
+    name: "Frontend",
+    skills: ["React", "GraphQL", "Tailwind CSS"],
+  },
+  {
+    name: "Backend",
+    skills: [".NET", "REST APIs", "SQL Server"],
+  },
+  {
+    name: "Practices",
+    skills: ["System Design", "CI/CD", "Testing", "Agile"],
+  },
+];
+---
+
+<section id="skills" class="bg-slate-800/30 py-20 lg:py-32">
+  <div class="mx-auto max-w-4xl px-6">
+    <h2
+      class="mb-16 text-center font-heading text-3xl font-bold tracking-tight lg:text-4xl"
+      data-animate
+    >
+      Skills
+    </h2>
+
+    <div class="space-y-10" data-animate>
+      {
+        categories.map(({ name, skills }) => (
+          <div>
+            <h3 class="mb-4 text-sm font-medium uppercase tracking-wider text-slate-500">
+              {name}
+            </h3>
+            <div class="flex flex-wrap gap-3">
+              {skills.map((skill) => (
+                <span class="rounded-lg border border-slate-700 bg-slate-800 px-4 py-2 text-sm font-medium text-slate-200 transition-colors hover:border-cyan-500/50 hover:text-cyan-400">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

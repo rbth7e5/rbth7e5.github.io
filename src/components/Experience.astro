@@ -1,0 +1,94 @@
+---
+const experiences = [
+  {
+    company: "The Trade Desk",
+    role: "Software Engineer II",
+    period: "Aug 2022 – Present",
+    note: "Promoted Mid 2023 · Singapore",
+    bullets: [
+      'Led full-stack implementation of the <strong class="text-slate-100">Creative Library Tile (Kokai)</strong>, creating end-to-end functionality including backend REST API and complete React/TypeScript frontend with list views, bulk operations, search, and pagination.',
+      'Spearheaded the <strong class="text-slate-100">Creative Troubleshooting System</strong>, a full-stack GraphQL solution that surfaced bid-blocking issues for advertisers, leading to a <span class="text-cyan-400">20% reduction</span> in manual customer support tickets.',
+      'Engineered the <strong class="text-slate-100">Creative Assignment Workbench</strong>, significantly enhancing advertiser efficiency by reducing clicks for a typical assignment flow by <span class="text-cyan-400">80%</span>.',
+      'Led development of <strong class="text-slate-100">Campaign Settings Snapshot</strong> with 2 junior engineers, providing shortcuts to quick campaign configuration options with <span class="text-cyan-400">6,500+ daily clicks</span>.',
+      "Contributed to team growth by formally mentoring new hire and intern engineers on full-stack development best practices and platform architecture.",
+    ],
+  },
+  {
+    company: "Shopee",
+    role: "Front-end Software Engineer",
+    period: "Jul 2021 – Aug 2022",
+    note: "Singapore",
+    bullets: [
+      'Reduced average navigation task time by <span class="text-cyan-400">50%</span> by collaborating with designers to upgrade the site navigation UX on Shopee\'s internal landing page.',
+      "Developed a no-code configuration tool for business operators, enabling quick customisation, scheduling, and configuration of campaign landing sites.",
+    ],
+  },
+];
+
+const earlierRoles = [
+  { company: "Coord", location: "New York City", period: "2019–2020" },
+  { company: "Trabble", location: "Singapore", period: "2020" },
+];
+---
+
+<section id="experience" class="py-20 lg:py-32">
+  <div class="mx-auto max-w-4xl px-6">
+    <h2
+      class="mb-16 text-center font-heading text-3xl font-bold tracking-tight lg:text-4xl"
+      data-animate
+    >
+      Experience
+    </h2>
+
+    <div class="space-y-16">
+      {
+        experiences.map((exp) => (
+          <div data-animate>
+            <div class="mb-2 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-3">
+              <h3 class="font-heading text-xl font-semibold">{exp.company}</h3>
+              <span class="text-sm font-medium text-cyan-400">{exp.role}</span>
+              <span class="shrink-0 text-sm text-slate-500 sm:ml-auto">
+                {exp.period}
+              </span>
+            </div>
+            <p class="mb-4 text-sm text-slate-500">{exp.note}</p>
+            <ul class="space-y-3">
+              {exp.bullets.map((bullet) => (
+                <li class="flex gap-3 leading-relaxed text-slate-300">
+                  <span class="mt-1.5 shrink-0 text-xs text-cyan-500">▸</span>
+                  <span set:html={bullet} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-12 flex flex-wrap items-baseline gap-x-1 text-sm text-slate-500" data-animate>
+      <span>Earlier:</span>
+      {
+        earlierRoles.map((role, i) => (
+          <>
+            <span class="text-slate-400">{role.company}</span>
+            <span>({role.location}, {role.period}){i < earlierRoles.length - 1 ? "," : ""}</span>
+          </>
+        ))
+      }
+    </div>
+
+    <div class="mt-16 border-t border-slate-800 pt-8" data-animate>
+      <div
+        class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-3"
+      >
+        <h3 class="font-heading text-lg font-semibold">
+          National University of Singapore
+        </h3>
+        <span class="text-sm text-slate-400"
+          >B.Comp in Computer Science (Honours) · Distinction (4.43/5)</span
+        >
+        <span class="shrink-0 text-sm text-slate-500 sm:ml-auto">2021</span>
+      </div>
+    </div>
+  </div>
+</section>

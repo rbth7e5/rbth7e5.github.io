@@ -1,24 +1,16 @@
 {
-  "name": " ",
-  "version": "0.0.1",
-  "description": "",
-  "keywords": "",
-  "license": "",
-  "author": "",
+  "name": "chencaijie-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "build": "parcel build index.html",
-    "start": "parcel index.html --open",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "npm run build; cp static/CNAME dist/CNAME; gh-pages -d dist"
-  },
-  "homepage": "https://rbth7e5.github.io",
-  "devDependencies": {
-    "gh-pages": "^3.1.0",
-    "prettier": "2.1.2"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.0",
-    "animejs": "^3.2.1",
-    "parcel-bundler": "^1.12.5"
+    "@tailwindcss/vite": "^4.2.1",
+    "astro": "^6.0.5",
+    "tailwindcss": "^4.2.1"
   }
 }

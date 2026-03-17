@@ -1,12 +1,21 @@
-# My Personal Portfolio
+# chencaijie.com
 
-## Running locally
+Personal portfolio built with [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/).
 
-1. Make sure you have node installed. Quickest way is to use homebrew and do `brew install node`.
-2. Install dependencies with npm. `npm install`
-3. `npm start` to run the website on localhost.
+## Development
 
-## Deploy
+```bash
+npm install
+npm run dev
+```
 
-1. Run `npm run build`
-2. `npm run deploy`
+## Build
+
+```bash
+npm run build
+npm run preview   # preview the build locally
+```
+
+## Deployment
+
+Pushes to `main` trigger the GitHub Actions workflow in `.github/workflows/deploy.yml`, which builds and deploys to GitHub Pages automatically.
