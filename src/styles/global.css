@@ -123,13 +123,13 @@ body {
   animation: spotlight 0.5s ease 1;
   animation-fill-mode: forwards;
   animation-delay: 500ms;
-  cx: calc(10vw + 32px);
-  cy: 40%;
+  cx: 50%;
+  cy: 60%;
 }
 
 @media only screen and (min-width: 768px) {
   .mask circle {
-    cx: 25%;
+    cx: 50%;
     cy: 50%;
   }
 }
@@ -144,7 +144,7 @@ body {
 .avatar-container {
   position: absolute;
   top: calc(60vh - 32px);
-  left: 10%;
+  left: calc(50% - 32px);
   z-index: 9999;
   width: 64px;
   height: 64px;
@@ -180,7 +180,7 @@ body {
 @media only screen and (min-width: 768px) {
   .avatar-container {
     top: calc(50vh - 64px);
-    left: calc(25% - 64px);
+    left: calc(50% - 64px);
     width: 128px;
     height: 128px;
   }
@@ -358,7 +358,7 @@ body {
   pointer-events: none;
   position: absolute;
   top: 80px;
-  left: 0;
+  left: calc(-40vw + 32px);
   border-radius: 8px;
   z-index: 998;
   width: 80vw;
@@ -368,6 +368,7 @@ body {
   animation-fill-mode: forwards;
   animation-delay: 1200ms;
   transition: opacity 0.4s ease;
+  text-align: center;
 }
 
 .intro-content a {
@@ -377,8 +378,8 @@ body {
 
 @media only screen and (min-width: 768px) {
   .intro-content {
-    top: 48px;
-    left: calc(25% + 128px);
+    top: 150px;
+    left: calc(-25vw + 64px);
     width: 50vw;
   }
 }
