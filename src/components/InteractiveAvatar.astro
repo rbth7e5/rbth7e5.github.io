@@ -1,0 +1,165 @@
+---
+import Icon from "./ui/Icon.astro";
+---
+
+<div id="avatar" class="avatar-container">
+  <img src="/images/avatar.jpg" alt="CJ" class="avatar" />
+  <div id="navbar-list" class="nav-list">
+    <a class="list-icon active-light" href="#home" style="--i: 0; --len: 7;">
+      <Icon name="home" class="h-4 w-4" />
+      <span>Home</span>
+    </a>
+    <a class="list-icon" href="#about" style="--i: 1; --len: 7;">
+      <Icon name="about" class="h-4 w-4" />
+      <span>About</span>
+    </a>
+    <a class="list-icon" href="#timeline" style="--i: 2; --len: 7;">
+      <Icon name="timeline" class="h-4 w-4" />
+      <span>Timeline</span>
+    </a>
+    <a class="list-icon" href="https://www.github.com/rbth7e5" target="_blank" rel="noopener" style="--i: 3; --len: 7;">
+      <Icon name="github" class="h-4 w-4" />
+      <span>GitHub</span>
+    </a>
+    <a class="list-icon" href="https://www.linkedin.com/in/chen-caijie/" target="_blank" rel="noopener" style="--i: 4; --len: 7;">
+      <Icon name="linkedin" class="h-4 w-4" />
+      <span>LinkedIn</span>
+    </a>
+    <a class="list-icon" href="mailto:caijie96@gmail.com" style="--i: 5; --len: 7;">
+      <Icon name="email" class="h-4 w-4" />
+      <span>Email</span>
+    </a>
+    <a class="list-icon" id="resume-icon" style="--i: 6; --len: 7; cursor: pointer;">
+      <Icon name="resume" class="h-4 w-4" />
+      <span>Resume</span>
+    </a>
+  </div>
+  <div class="speech-bubble">
+    <span id="avatar-text">Hello I'm Caijie</span>
+  </div>
+  <div id="intro-content" class="intro-content text-slate-300">
+    <p id="intro-text" class="text-sm md:text-base leading-relaxed">
+      I'm a Senior Software Engineer and I like to build things!
+      <br />
+      Currently, I'm a Senior Software Engineer at <strong class="text-white font-semibold">The Trade Desk</strong> in the Singapore Office.
+      <br />
+      I have a cat, I love singing, and I love skiing!
+      <br />
+      Scroll down to find out more! You can also find the source code for
+      this website
+      <a href="https://github.com/rbth7e5/rbth7e5.github.io" class="text-amber-400 hover:text-amber-300 transition-colors">here</a>.
+    </p>
+  </div>
+</div>
+
+<script>
+  // Drag Element Logic
+  const dragElement = (elmnt: HTMLElement) => {
+    let pos1 = 0,
+      pos2 = 0,
+      pos3 = 0,
+      pos4 = 0;
+
+    elmnt.onmousedown = dragMouseDown;
+    elmnt.addEventListener("touchstart", dragTouchStart, { passive: false });
+
+    function dragMouseDown(e: MouseEvent) {
+      // Don't drag if clicking links
+      if ((e.target as HTMLElement).closest("a") || (e.target as HTMLElement).closest("button")) return;
+      e = e || window.event;
+      e.preventDefault();
+      
+      elmnt.classList.add("dragging");
+      
+      // get the mouse cursor position at startup:
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      document.onmouseup = closeDragElement;
+      // call a function whenever the cursor moves:
+      document.onmousemove = elementDrag;
+    }
+
+    function elementDrag(e: MouseEvent) {
+      e = e || window.event;
+      e.preventDefault();
+      // calculate the new cursor position:
+      pos1 = pos3 - e.clientX;
+      pos2 = pos4 - e.clientY;
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      // set the element's new position:
+      elmnt.style.top = elmnt.offsetTop - pos2 + "px";
+      elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
+    }
+
+    function closeDragElement() {
+      elmnt.classList.remove("dragging");
+      // stop moving when mouse button is released:
+      document.onmouseup = null;
+      document.onmousemove = null;
+    }
+
+    function dragTouchStart(e: TouchEvent) {
+      if ((e.target as HTMLElement).closest("a") || (e.target as HTMLElement).closest("button")) return;
+      e.preventDefault();
+      
+      elmnt.classList.add("dragging");
+      
+      const touch = e.touches[0];
+      pos3 = touch.clientX;
+      pos4 = touch.clientY;
+      document.addEventListener("touchend", closeDragTouch, { passive: false });
+      document.addEventListener("touchmove", elementTouchDrag, { passive: false });
+    }
+
+    function elementTouchDrag(e: TouchEvent) {
+      e.preventDefault();
+      const touch = e.touches[0];
+      pos1 = pos3 - touch.clientX;
+      pos2 = pos4 - touch.clientY;
+      pos3 = touch.clientX;
+      pos4 = touch.clientY;
+      elmnt.style.top = elmnt.offsetTop - pos2 + "px";
+      elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
+    }
+
+    function closeDragTouch() {
+      elmnt.classList.remove("dragging");
+      document.removeEventListener("touchend", closeDragTouch);
+      document.removeEventListener("touchmove", elementTouchDrag);
+    }
+  };
+
+  // Mobile list-menu spacing calculations
+  const updateMobileSpacing = () => {
+    const avatar = document.getElementById("avatar");
+    if (avatar) {
+      const spacing = (window.innerWidth - window.innerWidth / 5 - 48) / 7;
+      avatar.style.setProperty("--mobile-spacing", `${spacing}px`);
+    }
+  };
+
+  const downloadResume = () => {
+    window.open(
+      "https://docs.google.com/document/d/1NPI-piwKe-UpZ0HXgYMwgq9PFD0h3gsX1yV5ZfGd3ko/edit?usp=sharing",
+      "_blank"
+    )?.focus();
+  };
+
+  // Initialize
+  const avatarEl = document.getElementById("avatar");
+  if (avatarEl) {
+    dragElement(avatarEl);
+  }
+
+  const resumeIcon = document.getElementById("resume-icon");
+  if (resumeIcon) {
+    resumeIcon.onclick = downloadResume;
+  }
+
+  // Spacing listeners
+  updateMobileSpacing();
+  window.addEventListener("resize", () => {
+    updateMobileSpacing();
+  });
+</script>

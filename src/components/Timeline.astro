@@ -1,0 +1,138 @@
+---
+const timelinePoints = [
+  {
+    year: "Aug 2022 – Present",
+    title: "Senior Software Engineer @ The Trade Desk",
+    desc: [
+      "After Shopee, I joined The Trade Desk as a Software Engineer and was later promoted to Senior Software Engineer. The Trade Desk is a demand-side platform in the ad-tech industry, helping advertisers and agencies run programmatic campaigns across the internet.",
+      "A big part of my work has been building out the Kokai platform, which is TTD's next-generation DSP UI. I work across the full stack on this, from the React and TypeScript frontend to the C# and .NET backend.",
+      "Over my time at TTD I've had the chance to build and own some really exciting features. The one I'm most proud of is the Creative Troubleshooting System, which surfaced bid blocking issues with creatives that could impact ad group spend. I've also built the Creative Library and the Campaign Settings Snapshot!",
+    ],
+    image: "/images/ttd.jpeg"
+  },
+  {
+    year: "July 2021",
+    title: "Software Engineer @ Shopee",
+    desc: [
+      "I secured my first full time job out of university at Shopee. A subsidiary of Sea Ltd, Shopee is the leading e-commerce platform in Southeast Asia and Taiwan.",
+      "I'm part of the Discover Landing Web Front-end Team. On top of building the interface you see on Shopee's landing page, my team also builds several internal tools business operators use to quickly configure and schedule campaign pages with no code!",
+    ],
+    image: "/images/shopee.jpeg"
+  },
+  {
+    year: "Aug 2020",
+    title: "Undergraduate Teaching Assistant for CS2103T",
+    desc: [
+      "NUS allows undergraduates to be Teaching Assistants for modules they excelled in. I decided to take the opportunity and applied to be a Teaching Assistant for CS2103T, an introductory module to Software Engineering.",
+      "My main responsibilities are conducting tutorials every week, and helping students with the team project they will have to submit at the end of the module.",
+    ],
+    image: "/images/nus.jpg"
+  },
+  {
+    year: "April 2020",
+    title: "Joined Trabble",
+    desc: [
+      "Due to the recall, I had to complete my NOC program at a local company in Singapore. I joined Trabble, another startup hoping to replace the physical concierge service in hotels.",
+      "I built a meeting/facility booking web application with 2 other interns who were recalled back from overseas exchange programs too. The entire internship was remote. Despite so, I still gained valuable skills learning software development on Windows using the .NET frameworks.",
+    ],
+    image: "/images/trabble.png"
+  },
+  {
+    year: "Aug 2019",
+    title: "Joined NUS Overseas College (NOC) Program",
+    desc: [
+      "I applied to the NOC program due to my overwhelmingly positive experience working at a startup and managed to get into the New York program.",
+      "Students on the program will spend 1 year in New York interning at a startup, picking up entrepreneurship skills along the way. I interned at Coord, a small startup that hopes to solve curb chaos in major cities.",
+      "My time in New York was very eye opening. I met many people across various cultures and backgrounds. My time in Coord was also an amazing learning opportunity. I picked up so many skills from colleagues who are top-tier software engineers. However, I got recalled back to Singapore in March 2020 due to COVID-19.",
+      "Oh and I met Singapore's Prime Minister Lee Hsien Loong at the Singapore Embassy in New York!",
+    ],
+    image: "/images/noc.jpeg"
+  },
+  {
+    year: "Dec 2018",
+    title: "Joined DateIdeas",
+    desc: [
+      "In December 2018, I was looking for something to do during the winter break. I chanced upon an email looking for Software Engineer Interns to help build a website for a young startup.",
+      "I decided to give it a shot. Despite having minimal guidance and spending most of my time fumbling through the codebase, I really loved the software development process in a startup. The uncertainty of things kept me on my toes and I liked how my work directly impacts the user.",
+    ],
+    image: "/images/dateideas.png"
+  },
+  {
+    year: "Dec 2016",
+    title: "Completed National Service",
+    desc: [
+      "I completed 2 years of mandatory military training in December 2016, posted to the Fast Craft Training Unit at Tuas Naval Base.",
+    ],
+    image: "/images/ns.jpeg"
+  },
+  {
+    year: "Dec 2014",
+    title: "Graduated from Hwa Chong Institution",
+    desc: [
+      "I graduated from the Integrated Program at Hwa Chong Institution, a 6-year program that combines high school and junior college. I did well enough in my A-levels to earn a place in the Computer Science program at the National University of Singapore.",
+    ],
+    image: "/images/hci.jpg"
+  },
+];
+---
+
+<div class="relative">
+  {/* Single continuous vertical line — desktop only */}
+  <div class="absolute top-0 bottom-0 hidden md:block bg-slate-700/60" style="width: 2px; left: calc(50% - 1px);"></div>
+
+  {
+    timelinePoints.map((point, index) => {
+      const isEven = index % 2 === 0;
+      return (
+        <div class="flex flex-row timeline-point" data-animate>
+
+          {/* Left column */}
+          {isEven ? (
+            <div
+              class="hidden md:block flex-1 bg-cover bg-center rounded-lg border border-slate-800/40 shadow-lg my-4 mr-6 min-h-[200px]"
+              style={`background-image: url('${point.image}');`}
+            />
+          ) : (
+            <div class="flex-1 my-4 px-4 flex flex-col justify-center rounded-lg">
+              <h2 class="font-heading text-lg md:text-xl font-bold text-white mb-2">
+                {point.title}
+              </h2>
+              {point.desc.map((para) => (
+                <p class="text-sm md:text-base text-slate-400 leading-relaxed mb-2 last:mb-0">
+                  {para}
+                </p>
+              ))}
+            </div>
+          )}
+
+          {/* Centre column — year badge sits on the line */}
+          <div class="flex flex-col items-center justify-center w-3 md:w-36 shrink-0 relative z-10">
+            <span class="shrink-0 text-xs md:text-sm font-semibold border border-slate-700 bg-slate-800 px-3 py-1.5 rounded-full text-amber-400 font-sans tracking-wide text-center leading-snug">
+              {point.year}
+            </span>
+          </div>
+
+          {/* Right column */}
+          {isEven ? (
+            <div class="flex-1 my-4 px-4 flex flex-col justify-center rounded-lg">
+              <h2 class="font-heading text-lg md:text-xl font-bold text-white mb-2">
+                {point.title}
+              </h2>
+              {point.desc.map((para) => (
+                <p class="text-sm md:text-base text-slate-400 leading-relaxed mb-2 last:mb-0">
+                  {para}
+                </p>
+              ))}
+            </div>
+          ) : (
+            <div
+              class="hidden md:block flex-1 bg-cover bg-center rounded-lg border border-slate-800/40 shadow-lg my-4 ml-6 min-h-[200px]"
+              style={`background-image: url('${point.image}');`}
+            />
+          )}
+
+        </div>
+      );
+    })
+  }
+</div>

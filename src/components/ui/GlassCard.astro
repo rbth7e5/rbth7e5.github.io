@@ -1,0 +1,19 @@
+---
+interface Props {
+  class?: string;
+  id?: string;
+  animate?: boolean;
+  [key: string]: any;
+}
+
+const { class: className = "", id, animate = true, ...rest } = Astro.props;
+---
+
+<div
+  id={id}
+  class={`glass-card rounded-xl p-6 md:p-8 hover:border-slate-500 transition-all duration-300 shadow-lg ${className}`}
+  data-animate={animate ? "" : undefined}
+  {...rest}
+>
+  <slot />
+</div>

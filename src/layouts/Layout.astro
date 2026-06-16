@@ -7,7 +7,7 @@ interface Props {
 }
 
 const {
-  title = "Chen Caijie — Software Engineer",
+  title = "Chen Caijie | Software Engineer",
   description = "Software Engineer at The Trade Desk. Full-stack engineer building TTD's next-generation media buying platform with React, TypeScript, C#, and GraphQL.",
 } = Astro.props;
 ---
@@ -53,19 +53,10 @@ const {
 
     <title>{title}</title>
   </head>
-  <body class="bg-slate-900 text-slate-100 antialiased">
+  <body class="loading-background bg-black text-slate-100 antialiased">
     <slot />
     <script>
-      document.addEventListener("click", (e) => {
-        const el = e.target.closest("[data-ga-event]");
-        if (!el || typeof gtag !== "function") return;
-        const eventName = el.getAttribute("data-ga-event");
-        const label = el.getAttribute("data-ga-label");
-        if (eventName) {
-          gtag("event", eventName, label ? { event_label: label } : {});
-        }
-      });
-
+      const scrollContainer = document.getElementById("scroll-container");
       const sectionsSeen = new Set();
       const animationObserver = new IntersectionObserver(
         (entries) => {
@@ -75,7 +66,7 @@ const {
             }
           });
         },
-        { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
+        { root: scrollContainer, threshold: 0.05, rootMargin: "0px 0px -20px 0px" },
       );
       const sectionObserver = new IntersectionObserver(
         (entries) => {
@@ -88,8 +79,18 @@ const {
             }
           });
         },
-        { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
+        { root: scrollContainer, threshold: 0.05, rootMargin: "0px 0px -20px 0px" },
       );
+
+      document.addEventListener("click", (e) => {
+        const el = e.target.closest("[data-ga-event]");
+        if (!el || typeof gtag !== "function") return;
+        const eventName = el.getAttribute("data-ga-event");
+        const label = el.getAttribute("data-ga-label");
+        if (eventName) {
+          gtag("event", eventName, label ? { event_label: label } : {});
+        }
+      });
 
       document.querySelectorAll("[data-animate]").forEach((el) => animationObserver.observe(el));
       document.querySelectorAll("[data-ga-section]").forEach((el) => sectionObserver.observe(el));

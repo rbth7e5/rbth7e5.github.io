@@ -1,0 +1,70 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+  class?: string;
+  [key: string]: any;
+}
+
+const { class: className = "", ...rest } = Astro.props;
+---
+
+<div class={`relative group my-8 ${className}`} data-carousel {...rest}>
+  <!-- Scrollable track -->
+  <div
+    class="carousel-track flex overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar gap-4 rounded-xl"
+  >
+    <slot />
+  </div>
+
+  <!-- Arrows -->
+  <button
+    class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 md:-left-12 flex h-10 w-10 items-center justify-center rounded-full bg-slate-800/80 border border-slate-700 text-slate-400 hover:text-white hover:bg-slate-700 cursor-pointer shadow-lg opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity"
+    aria-label="Previous Slide"
+  >
+    <Icon name="arrowLeft" class="h-6 w-6" />
+  </button>
+  <button
+    class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 md:-right-12 flex h-10 w-10 items-center justify-center rounded-full bg-slate-800/80 border border-slate-700 text-slate-400 hover:text-white hover:bg-slate-700 cursor-pointer shadow-lg opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity"
+    aria-label="Next Slide"
+  >
+    <Icon name="arrowRight" class="h-6 w-6" />
+  </button>
+</div>
+
+<style>
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .carousel-track::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .carousel-track {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+</style>
+
+<script>
+  const setupCarousels = () => {
+    document.querySelectorAll("[data-carousel]").forEach((carousel) => {
+      if (carousel.hasAttribute("data-carousel-initialized")) return;
+      carousel.setAttribute("data-carousel-initialized", "true");
+
+      const track = carousel.querySelector(".carousel-track") as HTMLElement;
+      const prevBtn = carousel.querySelector(".carousel-prev") as HTMLButtonElement;
+      const nextBtn = carousel.querySelector(".carousel-next") as HTMLButtonElement;
+
+      if (track && prevBtn && nextBtn) {
+        prevBtn.addEventListener("click", () => {
+          track.scrollBy({ left: -track.clientWidth, behavior: "smooth" });
+        });
+        nextBtn.addEventListener("click", () => {
+          track.scrollBy({ left: track.clientWidth, behavior: "smooth" });
+        });
+      }
+    });
+  };
+
+  // Run setup
+  setupCarousels();
+</script>

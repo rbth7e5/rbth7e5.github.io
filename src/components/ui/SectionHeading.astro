@@ -1,0 +1,16 @@
+---
+interface Props {
+  class?: string;
+  [key: string]: any;
+}
+
+const { class: className = "", ...rest } = Astro.props;
+---
+
+<h2
+  class={`font-heading text-2xl md:text-3xl font-extrabold text-white uppercase tracking-wider mb-8 ${className}`}
+  data-animate
+  {...rest}
+>
+  <slot />
+</h2>

@@ -1,0 +1,82 @@
+---
+import Icon from "./ui/Icon.astro";
+import GlassCard from "./ui/GlassCard.astro";
+import Carousel from "./ui/Carousel.astro";
+
+const projects = [
+  {
+    title: "I built a booking website for my acapella group!",
+    desc: "As the Resource Manager for NUS Resonance, I was tasked to manage the practice booking timeslots for members. The web app allowed members to submit timeslot requests to me. Once I approved the request, an automatic email was sent to the member for confirmation using EmailJS. I built it using React, Google Calendar API and Firebase.",
+    image: "/images/reso-booking-app.png",
+    github: "https://github.com/rbth7e5/resobooking",
+    host: "https://reso-practice-booking.web.app/"
+  },
+  {
+    title: "I won category champions at Ground Zero 2020!",
+    desc: "Over the weekend, I participated in Ground Zero 2020 with a bunch of schoolmates from NUS. I had a tough time trying to figure out if our idea is technically feasible on iOS, a platform known for its well-intentioned security and privacy features. P.S. I came up with the ingenious name PhishPatrol :P",
+    image: "/images/ground-zero.png",
+    host: "https://www.facebook.com/nesgroundzero/"
+  },
+  {
+    title: "I won Best Use of Google APIs at Hack NYU 2020!",
+    desc: "I teamed up with fellow NOC-mates to build BagX, a mobile application that facilitates and tracks the borrowing, returning and donating of reusable shopping bags among the NYU student community. We built the app with React Native and Google Firebase.",
+    image: "/images/hack-nyu.jpg",
+    github: "https://github.com/rbth7e5/peas-are-awful",
+    host: "https://devpost.com/software/bagx"
+  },
+  {
+    title: "I won Best Newbie Hack at Hack@CEWIT 2020!",
+    desc: "I spent a weekend away at Stony Brook University with a bunch of NOC-mates to attend Hack@CEWIT. We built Agora, a web platform that creates powerful conversations between individuals, wherever they are in the world.",
+    image: "/images/hack-cewit.jpeg",
+    github: "https://github.com/rbth7e5/bustythesquirrel",
+    host: "https://devpost.com/software/agora-5pbsm6"
+  }
+];
+---
+
+<Carousel id="project-carousel">
+  {
+    projects.map((proj) => (
+      <GlassCard class="snap-start shrink-0 w-full flex flex-col md:flex-row items-center gap-8 min-h-[360px] md:h-[340px]" animate={false}>
+        <!-- Project Image -->
+        <div
+          class="w-full md:w-1/2 h-44 md:h-full bg-cover bg-center rounded-lg shadow-inner shrink-0"
+          style={`background-image: url('${proj.image}');`}
+        />
+        <!-- Project Text -->
+        <div class="flex-1 flex flex-col justify-between h-full text-slate-100">
+          <div>
+            <h2 class="font-heading text-lg md:text-xl font-bold mb-3 tracking-tight text-white">
+              {proj.title}
+            </h2>
+            <p class="text-sm md:text-base text-slate-300 leading-relaxed font-sans mb-4">
+              {proj.desc}
+            </p>
+          </div>
+          <div class="flex gap-3 mt-auto">
+            {proj.github && (
+              <a
+                href={proj.github}
+                target="_blank"
+                rel="noopener"
+                class="inline-flex items-center justify-center rounded-lg border border-slate-700 bg-slate-800 px-4 py-2 text-xs md:text-sm font-semibold hover:bg-slate-700 hover:text-white transition-colors"
+              >
+                View Project
+              </a>
+            )}
+            {proj.host && (
+              <a
+                href={proj.host}
+                target="_blank"
+                rel="noopener"
+                class="inline-flex items-center justify-center rounded-lg border border-slate-700 bg-slate-800 px-4 py-2 text-xs md:text-sm font-semibold hover:bg-slate-700 hover:text-white transition-colors"
+              >
+                {proj.host.includes("facebook") ? "Event Link" : "Host Website"}
+              </a>
+            )}
+          </div>
+        </div>
+      </GlassCard>
+    ))
+  }
+</Carousel>
