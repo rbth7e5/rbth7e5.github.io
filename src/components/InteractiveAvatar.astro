@@ -318,17 +318,51 @@ import Icon from "./ui/Icon.astro";
     transform: translate(0, calc((var(--i) - var(--len)) * 38px - 32px));
   }
 
-  /* Scrolled mobile state (horizontal row below avatar) */
+  /* Scrolled mobile state (horizontal row below avatar using flexbox) */
+  :global(.scrolled) .nav-list {
+    display: flex !important;
+    flex-direction: row !important;
+    position: absolute !important;
+    top: 32px !important;
+    left: -24px !important;
+    width: auto !important;
+    height: auto !important;
+    gap: 4px !important;
+    z-index: 998 !important;
+  }
+
   :global(.scrolled) .list-icon {
+    position: static !important;
+    transform: none !important;
     width: 32px !important;
-    border-radius: 50%;
-    transform: translate(calc(var(--i) * var(--mobile-spacing)), 32px);
+    height: 32px !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    justify-content: flex-start !important;
+    padding-left: 8px !important;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-radius 0.3s ease, background-color 0.3s ease !important;
   }
 
   :global(.scrolled) .list-icon span {
-    display: none;
     opacity: 0;
     width: 0;
+    display: inline-block !important;
+    white-space: nowrap;
+    transition: opacity 0.2s ease, width 0.2s ease;
+  }
+
+  /* Expand on hover or active state when scrolled on mobile */
+  :global(.scrolled) .list-icon:hover,
+  :global(.scrolled) .list-icon:global(.active-light) {
+    width: 96px !important;
+    border-radius: 8px !important;
+  }
+
+  :global(.scrolled) .list-icon:hover span,
+  :global(.scrolled) .list-icon:global(.active-light) span {
+    opacity: 1 !important;
+    width: 52px !important;
+    margin-left: 6px !important;
   }
 
   /* Speech bubble mobile positioning to prevent screen overflow */
@@ -435,9 +469,8 @@ import Icon from "./ui/Icon.astro";
   .nav-list :global(.active-light) {
     border-radius: 50% !important;
   }
-}
-
-:global(.scrolled) .nav-list :global(.active-light) {
-  border-radius: 50% !important;
+  :global(.scrolled) .nav-list :global(.active-light) {
+    border-radius: 50% !important;
+  }
 }
 </style>
