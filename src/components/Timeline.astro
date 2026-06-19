@@ -93,8 +93,11 @@ const timelinePoints = [
               style={`background-image: url('${point.image}');`}
             />
           ) : (
-            <div class="flex-1 my-4 px-4 flex flex-col justify-center rounded-lg">
-              <h2 class="font-heading text-lg md:text-xl font-bold text-white mb-2">
+            <div class="flex-1 my-4 px-4 flex flex-col justify-center rounded-lg relative">
+              <span class="md:hidden absolute top-1 right-4 text-[10px] font-semibold border border-slate-700 bg-slate-800 px-2 py-0.5 rounded-full text-amber-400 font-sans tracking-wide">
+                {point.year}
+              </span>
+              <h2 class="font-heading text-lg md:text-xl font-bold text-white mb-2 pr-28 md:pr-0">
                 {point.title}
               </h2>
               {point.desc.map((para) => (
@@ -106,7 +109,7 @@ const timelinePoints = [
           )}
 
           {/* Centre column — year badge sits on the line */}
-          <div class="flex flex-col items-center justify-center w-3 md:w-36 shrink-0 relative z-10">
+          <div class="hidden md:flex flex-col items-center justify-center w-36 shrink-0 relative z-10">
             <span class="shrink-0 text-xs md:text-sm font-semibold border border-slate-700 bg-slate-800 px-3 py-1.5 rounded-full text-amber-400 font-sans tracking-wide text-center leading-snug">
               {point.year}
             </span>
@@ -114,8 +117,11 @@ const timelinePoints = [
 
           {/* Right column */}
           {isEven ? (
-            <div class="flex-1 my-4 px-4 flex flex-col justify-center rounded-lg">
-              <h2 class="font-heading text-lg md:text-xl font-bold text-white mb-2">
+            <div class="flex-1 my-4 px-4 flex flex-col justify-center rounded-lg relative">
+              <span class="md:hidden absolute top-1 right-4 text-[10px] font-semibold border border-slate-700 bg-slate-800 px-2 py-0.5 rounded-full text-amber-400 font-sans tracking-wide">
+                {point.year}
+              </span>
+              <h2 class="font-heading text-lg md:text-xl font-bold text-white mb-2 pr-28 md:pr-0">
                 {point.title}
               </h2>
               {point.desc.map((para) => (

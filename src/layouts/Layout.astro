@@ -56,7 +56,6 @@ const {
   <body class="loading-background bg-black text-slate-100 antialiased">
     <slot />
     <script>
-      const scrollContainer = document.getElementById("scroll-container");
       const sectionsSeen = new Set();
       const animationObserver = new IntersectionObserver(
         (entries) => {
@@ -66,7 +65,7 @@ const {
             }
           });
         },
-        { root: scrollContainer, threshold: 0.05, rootMargin: "0px 0px -20px 0px" },
+        { threshold: 0.05, rootMargin: "0px 0px -20px 0px" },
       );
       const sectionObserver = new IntersectionObserver(
         (entries) => {
@@ -79,7 +78,7 @@ const {
             }
           });
         },
-        { root: scrollContainer, threshold: 0.05, rootMargin: "0px 0px -20px 0px" },
+        { threshold: 0.05, rootMargin: "0px 0px -20px 0px" },
       );
 
       document.addEventListener("click", (e) => {

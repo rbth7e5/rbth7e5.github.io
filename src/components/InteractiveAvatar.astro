@@ -88,8 +88,9 @@ import Icon from "./ui/Icon.astro";
       pos3 = e.clientX;
       pos4 = e.clientY;
       // set the element's new position:
-      elmnt.style.top = elmnt.offsetTop - pos2 + "px";
-      elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
+      const rect = elmnt.getBoundingClientRect();
+      elmnt.style.top = rect.top - pos2 + "px";
+      elmnt.style.left = rect.left - pos1 + "px";
     }
 
     function closeDragElement() {
@@ -119,8 +120,9 @@ import Icon from "./ui/Icon.astro";
       pos2 = pos4 - touch.clientY;
       pos3 = touch.clientX;
       pos4 = touch.clientY;
-      elmnt.style.top = elmnt.offsetTop - pos2 + "px";
-      elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
+      const rect = elmnt.getBoundingClientRect();
+      elmnt.style.top = rect.top - pos2 + "px";
+      elmnt.style.left = rect.left - pos1 + "px";
     }
 
     function closeDragTouch() {
@@ -167,7 +169,7 @@ import Icon from "./ui/Icon.astro";
 <style>
 /* Interactive Avatar and Radial Menu */
 .avatar-container {
-  position: absolute;
+  position: fixed;
   top: calc(60vh - 32px);
   left: calc(50% - 32px);
   z-index: 9999;
@@ -220,6 +222,7 @@ import Icon from "./ui/Icon.astro";
 
 /* Scrolled state transitions */
 :global(.scrolled) .avatar-container {
+  position: fixed !important;
   top: 64px !important;
   left: 64px !important;
   opacity: 0.75;
@@ -227,9 +230,10 @@ import Icon from "./ui/Icon.astro";
 
 @media only screen and (max-width: 768px) {
   :global(.scrolled) .avatar-container {
-    top: calc(10vw) !important;
-    left: calc(10vw) !important;
-    opacity: 0.75;
+    position: fixed !important;
+    top: calc(100dvh - 128px) !important;
+    left: 48px !important;
+    opacity: 0.85;
   }
 }
 
@@ -335,33 +339,37 @@ import Icon from "./ui/Icon.astro";
     position: static !important;
     transform: none !important;
     width: 32px !important;
+    max-width: 32px !important;
     height: 32px !important;
     border-radius: 50% !important;
     overflow: hidden !important;
     justify-content: flex-start !important;
     padding-left: 8px !important;
-    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-radius 0.3s ease, background-color 0.3s ease !important;
+    padding-right: 0px !important;
+    transition: max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-radius 0.3s ease, background-color 0.3s ease !important;
   }
 
   :global(.scrolled) .list-icon span {
     opacity: 0;
-    width: 0;
+    max-width: 0;
     display: inline-block !important;
     white-space: nowrap;
-    transition: opacity 0.2s ease, width 0.2s ease;
+    transition: opacity 0.2s ease, max-width 0.2s ease;
   }
 
   /* Expand on hover or active state when scrolled on mobile */
   :global(.scrolled) .list-icon:hover,
   :global(.scrolled) .list-icon:global(.active-light) {
-    width: 96px !important;
+    width: auto !important;
+    max-width: 120px !important;
     border-radius: 8px !important;
+    padding-right: 10px !important;
   }
 
   :global(.scrolled) .list-icon:hover span,
   :global(.scrolled) .list-icon:global(.active-light) span {
     opacity: 1 !important;
-    width: 52px !important;
+    max-width: 80px !important;
     margin-left: 6px !important;
   }
 

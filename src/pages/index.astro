@@ -169,55 +169,52 @@ import Navbar from "../components/Navbar.astro";
 </Layout>
 
 <script>
-  const scrollContainer = document.getElementById("scroll-container") as HTMLElement;
   const navbar = document.getElementById("navbar") as HTMLElement;
 
-  if (scrollContainer) {
-    // Scroll scrolled-state class toggling
-    scrollContainer.addEventListener("scroll", () => {
-      if (scrollContainer.scrollTop > 50) {
-        document.body.classList.add("scrolled");
+  // Scroll scrolled-state class toggling
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 50) {
+      document.body.classList.add("scrolled");
+    } else {
+      document.body.classList.remove("scrolled");
+    }
+  });
+
+  // Nav Highlighter logic
+  const sections = document.querySelectorAll("section[id]");
+  const navHighlighter = () => {
+    let scrollY = window.scrollY;
+    sections.forEach((current) => {
+      const sectionHeight = (current as HTMLElement).offsetHeight;
+      const sectionTop = (current as HTMLElement).offsetTop - 120; // Trigger slightly early
+      const sectionId = current.getAttribute("id");
+      const element = document.querySelector(`#navbar a[href*="${sectionId}"]`);
+      const listElement = document.querySelector(`.nav-list a[href*="${sectionId}"]`);
+      const avatarText = document.getElementById("avatar-text");
+
+      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+        if (avatarText) {
+          switch (sectionId) {
+            case "home":
+              avatarText.innerText = "Hello I'm Caijie";
+              break;
+            case "about":
+              avatarText.innerText = "All About Me";
+              break;
+            case "timeline":
+              avatarText.innerText = "My Timeline";
+              break;
+          }
+        }
+        element?.classList.add("active-light");
+        listElement?.classList.add("active-light");
       } else {
-        document.body.classList.remove("scrolled");
+        element?.classList.remove("active-light");
+        listElement?.classList.remove("active-light");
       }
     });
-
-    // Nav Highlighter logic
-    const sections = document.querySelectorAll("section[id]");
-    const navHighlighter = () => {
-      let scrollY = scrollContainer.scrollTop;
-      sections.forEach((current) => {
-        const sectionHeight = (current as HTMLElement).offsetHeight;
-        const sectionTop = (current as HTMLElement).offsetTop - 120; // Trigger slightly early
-        const sectionId = current.getAttribute("id");
-        const element = document.querySelector(`#navbar a[href*="${sectionId}"]`);
-        const listElement = document.querySelector(`.nav-list a[href*="${sectionId}"]`);
-        const avatarText = document.getElementById("avatar-text");
-
-        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-          if (avatarText) {
-            switch (sectionId) {
-              case "home":
-                avatarText.innerText = "Hello I'm Caijie";
-                break;
-              case "about":
-                avatarText.innerText = "All About Me";
-                break;
-              case "timeline":
-                avatarText.innerText = "My Timeline";
-                break;
-            }
-          }
-          element?.classList.add("active-light");
-          listElement?.classList.add("active-light");
-        } else {
-          element?.classList.remove("active-light");
-          listElement?.classList.remove("active-light");
-        }
-      });
-    };
-    scrollContainer.addEventListener("scroll", navHighlighter);
-  }
+  };
+  window.addEventListener("scroll", navHighlighter);
 
   // Load handler (fades out spinner loader)
   window.addEventListener("load", function () {
@@ -275,14 +272,16 @@ import Navbar from "../components/Navbar.astro";
   background-repeat: no-repeat;
   background-position: center bottom;
   background-image: url("/images/cover.jpeg") !important;
-  height: 100vh;
+  background-attachment: fixed;
+  min-height: 100vh;
   width: 100vw;
   z-index: -1;
 }
 
 .mask {
-  position: absolute;
+  position: fixed;
   left: 0;
+  top: 0;
   height: 100vh;
   width: 100vw;
   pointer-events: none;

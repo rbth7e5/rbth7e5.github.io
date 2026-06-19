@@ -19,12 +19,13 @@
 }
 
 /* Core fixed layouts */
-html,
+html {
+  scroll-behavior: smooth;
+}
 body {
   margin: 0;
   padding: 0;
-  overflow: hidden;
-  height: 100%;
+  overflow-x: hidden;
   background-color: black;
 }
 
@@ -37,9 +38,6 @@ body {
 
 /* Scroll Container */
 .scroll-container {
-  height: 100vh;
-  overflow-y: scroll;
-  scroll-behavior: smooth;
   visibility: hidden;
   position: relative;
   z-index: 3;
