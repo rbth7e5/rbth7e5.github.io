@@ -163,3 +163,281 @@ import Icon from "./ui/Icon.astro";
     updateMobileSpacing();
   });
 </script>
+
+<style>
+/* Interactive Avatar and Radial Menu */
+.avatar-container {
+  position: absolute;
+  top: calc(60vh - 32px);
+  left: calc(50% - 32px);
+  z-index: 9999;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.avatar-container.dragging {
+  transition: none !important;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 0;
+  height: 0;
+  box-shadow: 0 0 8px 1px black;
+  animation: avatar-popup 0.5s ease 1;
+  animation-fill-mode: forwards;
+  animation-delay: 1s;
+  cursor: move;
+}
+
+@keyframes avatar-popup {
+  to {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .avatar-container {
+    top: calc(50vh - 64px);
+    left: calc(50% - 64px);
+    width: 128px;
+    height: 128px;
+  }
+
+  @keyframes avatar-popup {
+    to {
+      width: 128px;
+      height: 128px;
+    }
+  }
+}
+
+/* Scrolled state transitions */
+:global(.scrolled) .avatar-container {
+  top: 64px !important;
+  left: 64px !important;
+  opacity: 0.75;
+}
+
+@media only screen and (max-width: 768px) {
+  :global(.scrolled) .avatar-container {
+    top: calc(10vw) !important;
+    left: calc(10vw) !important;
+    opacity: 0.75;
+  }
+}
+
+/* Nav Menu Icons */
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  z-index: 998;
+}
+
+.list-icon {
+  position: absolute;
+  width: 128px;
+  height: 32px;
+  top: -16px;
+  left: -32px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background-color: #6c757d;
+  border: 1px solid white;
+  z-index: 998;
+  opacity: 1;
+  color: white;
+  text-decoration: none;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.list-icon i,
+.list-icon :global(svg) {
+  color: inherit;
+  padding: 4px;
+}
+
+.list-icon span {
+  opacity: 1;
+  margin-left: 2px;
+  width: 94px;
+  transition: opacity 0.4s ease, width 0.4s ease;
+}
+
+.list-icon:hover {
+  background-color: white;
+  color: #6c757d;
+}
+
+/* Radial layouts - desktop */
+@media only screen and (min-width: 768px) {
+  .list-icon {
+    width: 26px;
+    height: 26px;
+    top: -13px;
+    left: -13px;
+    opacity: 0;
+    border-radius: 50%;
+    z-index: -1;
+  }
+
+  .list-icon span {
+    display: none;
+    opacity: 0;
+    width: 0;
+  }
+
+  /* Expand radially when scrolled on desktop */
+  :global(.scrolled) .list-icon {
+    opacity: 1;
+    z-index: 998;
+  }
+  :global(.scrolled) .list-icon:nth-child(1) { transform: translate(-4px, -88px); }
+  :global(.scrolled) .list-icon:nth-child(2) { transform: translate(-41px, -78px); }
+  :global(.scrolled) .list-icon:nth-child(3) { transform: translate(-70px, -54px); }
+  :global(.scrolled) .list-icon:nth-child(4) { transform: translate(-86px, -19px); }
+  :global(.scrolled) .list-icon:nth-child(5) { transform: translate(-86px, 19px); }
+  :global(.scrolled) .list-icon:nth-child(6) { transform: translate(-70px, 54px); }
+  :global(.scrolled) .list-icon:nth-child(7) { transform: translate(-41px, 78px); }
+}
+
+/* Stacking layouts - mobile */
+@media only screen and (max-width: 768px) {
+  /* Restored mobile state (vertical stack above avatar) */
+  .list-icon {
+    transform: translate(0, calc((var(--i) - var(--len)) * 38px - 32px));
+  }
+
+  /* Scrolled mobile state (horizontal row below avatar) */
+  :global(.scrolled) .list-icon {
+    width: 32px !important;
+    border-radius: 50%;
+    transform: translate(calc(var(--i) * var(--mobile-spacing)), 32px);
+  }
+
+  :global(.scrolled) .list-icon span {
+    display: none;
+    opacity: 0;
+    width: 0;
+  }
+
+  /* Speech bubble mobile positioning to prevent screen overflow */
+  .speech-bubble {
+    left: 75px !important;
+    top: 12px !important;
+    font-size: 14px !important;
+    padding: 4px 8px !important;
+  }
+
+  .speech-bubble:after {
+    border-width: 12px 12px 0 0 !important;
+    margin-left: -12px !important;
+    margin-top: -6px !important;
+  }
+}
+
+/* Speech Bubble and Intro Text */
+.speech-bubble {
+  position: absolute;
+  left: 100px;
+  top: 0;
+  background: white;
+  color: black;
+  border-radius: 8px;
+  padding: 6px;
+  font-size: 20px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  animation: speech-bubble-anim 0.5s ease 1;
+  animation-fill-mode: forwards;
+  animation-delay: 1000ms;
+}
+
+.speech-bubble:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 20px solid transparent;
+  border-right-color: white;
+  border-left: 0;
+  border-bottom: 0;
+  margin-top: -10px;
+  margin-left: -20px;
+}
+
+@media only screen and (min-width: 768px) {
+  .speech-bubble {
+    left: 160px;
+    top: -16px;
+    padding: 8px;
+  }
+}
+
+@keyframes speech-bubble-anim {
+  to {
+    opacity: 1;
+  }
+}
+
+.intro-content {
+  pointer-events: none;
+  position: absolute;
+  top: 80px;
+  left: calc(-40vw + 32px);
+  border-radius: 8px;
+  z-index: 998;
+  width: 80vw;
+  color: white;
+  opacity: 0;
+  animation: speech-bubble-anim 0.5s ease 1;
+  animation-fill-mode: forwards;
+  animation-delay: 1200ms;
+  transition: opacity 0.4s ease;
+  text-align: center;
+}
+
+.intro-content a {
+  pointer-events: auto;
+  text-decoration: underline;
+}
+
+@media only screen and (min-width: 768px) {
+  .intro-content {
+    top: 150px;
+    left: calc(-25vw + 64px);
+    width: 50vw;
+  }
+}
+
+/* Hide speech bubble and intro when scrolled */
+:global(.scrolled) .speech-bubble,
+:global(.scrolled) .intro-content {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+/* Active status styling overrides for lists */
+@media only screen and (min-width: 768px) {
+  .nav-list :global(.active-light) {
+    border-radius: 50% !important;
+  }
+}
+
+:global(.scrolled) .nav-list :global(.active-light) {
+  border-radius: 50% !important;
+}
+</style>
