@@ -33,29 +33,7 @@ body {
   height: 100vh;
 }
 
-/* Spinner Loader */
-.loading {
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  border: 3px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  border-top-color: #fff;
-  animation: spin 1s ease-in-out infinite;
-  position: fixed;
-  margin: auto;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 99999;
-}
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
 
 /* Scroll Container */
 .scroll-container {
@@ -85,60 +63,7 @@ body {
   background-color: rgba(0, 0, 0, 0.45);
 }
 
-/* Global Sections */
-.home,
-.about,
-.timeline-section {
-  color: white;
-  display: flex;
-  flex-direction: column;
-}
 
-.home {
-  height: 100vh;
-}
-
-/* Background & Spotlight Mask */
-.background-cover {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center bottom;
-  background-image: url("/images/cover.jpeg") !important;
-  height: 100vh;
-  width: 100vw;
-  z-index: -1;
-}
-
-.mask {
-  position: absolute;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.mask circle {
-  r: 100%;
-  animation: spotlight 0.5s ease 1;
-  animation-fill-mode: forwards;
-  animation-delay: 500ms;
-  cx: 50%;
-  cy: 60%;
-}
-
-@media only screen and (min-width: 768px) {
-  .mask circle {
-    cx: 50%;
-    cy: 50%;
-  }
-}
-
-@keyframes spotlight {
-  to {
-    r: 0;
-  }
-}
 
 
 
@@ -178,10 +103,4 @@ body {
 
 
 
-/* Glassmorphic improvements for text legibility */
-.glass-card {
-  background-color: rgba(18, 16, 14, 0.7) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-}
+

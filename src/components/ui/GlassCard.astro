@@ -17,3 +17,12 @@ const { class: className = "", id, animate = true, ...rest } = Astro.props;
 >
   <slot />
 </div>
+
+<style>
+.glass-card {
+  background-color: rgba(18, 16, 14, 0.7) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+</style>
