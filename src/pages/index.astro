@@ -4,11 +4,11 @@ import InteractiveAvatar from "../components/InteractiveAvatar.astro";
 import ProjectCarousel from "../components/ProjectCarousel.astro";
 import Timeline from "../components/Timeline.astro";
 import Skills from "../components/Skills.astro";
-import Icon from "../components/ui/Icon.astro";
 import SectionHeading from "../components/ui/SectionHeading.astro";
 import GlassCard from "../components/ui/GlassCard.astro";
 import WorkCard from "../components/ui/WorkCard.astro";
 import Carousel from "../components/ui/Carousel.astro";
+import Navbar from "../components/Navbar.astro";
 ---
 
 <Layout>
@@ -42,45 +42,7 @@ import Carousel from "../components/ui/Carousel.astro";
   <!-- Scrollable content container -->
   <div id="scroll-container" class="scroll-container">
     <!-- Navbar -->
-    <div id="navbar">
-      <ul class="container mx-auto flex flex-row items-center justify-between px-6 py-4 max-w-5xl">
-        <div class="flex flex-row items-center gap-6">
-          <li class="list-none">
-            <a class="nav-link text-white hover:text-amber-400 font-medium tracking-wide transition-colors active-light px-3 py-1.5" href="#home">Home</a>
-          </li>
-          <li class="list-none">
-            <a class="nav-link text-white hover:text-amber-400 font-medium tracking-wide transition-colors px-3 py-1.5" href="#about">About</a>
-          </li>
-          <li class="list-none">
-            <a class="nav-link text-white hover:text-amber-400 font-medium tracking-wide transition-colors px-3 py-1.5" href="#timeline">Timeline</a>
-          </li>
-        </div>
-        <div class="flex flex-row items-center gap-6">
-          <div class="flex items-center gap-4">
-            <a href="https://www.github.com/rbth7e5" target="_blank" rel="noopener" class="text-slate-400 hover:text-white transition-colors" aria-label="GitHub">
-              <Icon name="github" class="h-5 w-5" />
-            </a>
-            <a href="https://www.linkedin.com/in/chen-caijie/" target="_blank" rel="noopener" class="text-slate-400 hover:text-white transition-colors" aria-label="LinkedIn">
-              <Icon name="linkedin" class="h-5 w-5" />
-            </a>
-          </div>
-          <div class="flex items-center gap-3">
-            <a
-              href="mailto:caijie96@gmail.com"
-              class="rounded-lg border border-slate-700 bg-slate-800/50 hover:bg-white hover:text-slate-900 px-4 py-1.5 text-xs font-semibold text-slate-300 transition-colors"
-            >
-              Email Me
-            </a>
-            <button
-              id="navbar-resume"
-              class="rounded-lg border border-slate-700 bg-slate-800/50 hover:bg-white hover:text-slate-900 px-4 py-1.5 text-xs font-semibold text-slate-300 transition-colors cursor-pointer"
-            >
-              My Resume
-            </button>
-          </div>
-        </div>
-      </ul>
-    </div>
+    <Navbar />
 
     <!-- Sections -->
     <section id="home" class="home">
