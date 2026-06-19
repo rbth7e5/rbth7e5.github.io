@@ -290,7 +290,7 @@ body {
 @media only screen and (max-width: 768px) {
   /* Restored mobile state (vertical stack above avatar) */
   .list-icon {
-    transform: translate(0, calc((var(--i) - var(--len)) * var(--mobile-spacing) * 1.1 - 32px));
+    transform: translate(0, calc((var(--i) - var(--len)) * 38px - 32px));
   }
 
   /* Scrolled mobile state (horizontal row below avatar) */
@@ -304,6 +304,20 @@ body {
     display: none;
     opacity: 0;
     width: 0;
+  }
+
+  /* Speech bubble mobile positioning to prevent screen overflow */
+  .speech-bubble {
+    left: 75px !important;
+    top: 12px !important;
+    font-size: 14px !important;
+    padding: 4px 8px !important;
+  }
+
+  .speech-bubble:after {
+    border-width: 12px 12px 0 0 !important;
+    margin-left: -12px !important;
+    margin-top: -6px !important;
   }
 }
 
@@ -415,9 +429,8 @@ body {
 }
 
 @media only screen and (max-width: 768px) {
-  .scrolled #navbar {
-    top: calc(10vw);
-    left: calc(-10vw);
+  #navbar {
+    display: none !important;
   }
 }
 
@@ -447,13 +460,19 @@ body {
 .active-light {
   background-color: white !important;
   color: #6c757d !important;
-  border-radius: 4px;
+  border-radius: 8px !important;
 }
 .active-light svg {
   color: #6c757d !important;
 }
 
-.nav-list .active-light {
+@media only screen and (min-width: 768px) {
+  .nav-list .active-light {
+    border-radius: 50% !important;
+  }
+}
+
+.scrolled .nav-list .active-light {
   border-radius: 50% !important;
 }
 
